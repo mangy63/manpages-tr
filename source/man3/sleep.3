@@ -1,0 +1,75 @@
+'\" t
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH sleep 3 2025-05-17 "Linux man-pages 6.16"
+.SH AD
+sleep \- belirlenen sayı kadar saniye kadar duraklatır
+.SH KÜTÜPHANE
+Standart C kütüphanesi
+.RI ( libc ,\~ \-lc )
+.SH ÖZET
+.nf
+.B #include <unistd.h>
+.P
+.BI "unsigned int sleep(unsigned int " "seconds" );
+.fi
+.SH TANIM
+.BR sleep ()
+çağıran iş parçacığını belirtilen gerçek zaman 
+.I saniyeleri
+geçene kadar kadar veya göz ardı edilmeyecek bir sinyal gelene kadar duraklatır
+.SH DÖNÜŞ DEĞERİ
+Eğer istenen zaman geçtiyse sıfır,
+veya çağrı bir sinyal işleyici tarafından kesintiye uğratılırsa kalan saniye sayısı.
+.SH ÖZELLİKLER
+Bu bölümde kullanılan terimlerin açıklamaları için, bakınız
+.BR attributes (7).
+.TS
+allbox;
+lbx lb lb
+l l l.
+Arayüz	Özellik	Değer
+T{
+.na
+.nh
+.BR sleep ()
+T}	İş parçacığı güvenliği	MT-Unsafe sig:SIGCHLD/linux
+.TE
+.SH SÜRÜMLER
+.BR sleep ()
+Linux'da
+.BR nanosleep (2)
+aracılığıyla uygulanır.
+kullanılan saatin tartışılması için
+.BR nanosleep (2)
+man sayfasına bakınız.
+.P
+.BR sleep ()
+bazı sistemlerde
+.BR alarm (2)
+ve
+.B SIGALRM
+kullanılarak uygulanabilir
+(POSIX.1 buna izin verir);
+.BR alarm (2)
+ve
+.BR sleep ()
+çağrılarını karıştırmak kötü bir fikirdir.
+.SH STANDARTLAR
+POSIX.1-2008.
+.SH GEÇMİŞ
+POSIX.1-2001.
+.SH UYARILAR
+Duraklatılmışken sinyal işleyicisinden 
+.BR longjmp (3)
+kullanmak veya
+.B SIGALRM
+işlenmesini değiştirmek tanımsız sonuçlara sebep olacaktır.
+.SH SEE ALSO
+.BR sleep (1),
+.BR alarm (2),
+.BR nanosleep (2),
+.BR signal (2),
+.BR signal (7)
